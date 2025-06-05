@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,8 +10,15 @@
 </head>
 <body>
   <div class="container">
+    <section class="intro-box">
+      <h2>👋 Welcome to GhostRank</h2>
+      <p>This is the ultimate showdown game where classmates face off in visual battles. Just click on the person you think deserves to win — simple as that!</p>
+      <p>Who will be crowned the ultimate class legend? It’s all up to you.</p>
+      <p class="credit">Crafted with ❤️ by <strong>Md. Kamran AKA Ghost</strong> 👻</p>
+    </section>
+
     <h1>👻 GhostRank: Class Battle Royale</h1>
-    <p class="subtitle">Who will be crowned the ultimate class legend?</p>
+    <p class="subtitle">Click on the candidate you think should win the round!</p>
 
     <div id="battle">
       <div class="candidate card" id="left" onclick="vote('left')">
@@ -28,25 +36,16 @@
       <h2>🏆 The Ultimate Classmate is:</h2>
       <img id="winner-img" src="" alt="Winner" />
       <h3 id="winner-name"></h3>
-      <p style="font-size: 1.2rem;">Since there were only guys... You, my friend, are officially 💅 <strong>GAY</strong> 😘</p>
+      <p class="funny-text">Since there were only guys... You, my friend, are officially 💅 <strong>GAY</strong> 😘</p>
       <button onclick="restart()">Replay Showdown 🔄</button>
     </div>
 
-    <div id="leaderboard" class="leaderboard">
-      <h2>🏅 Leaderboard</h2>
-      <ol id="leaderboard-list"></ol>
-    </div>
-
-    <footer style="text-align:center; color:#ccc; margin-top:3rem; font-size: 1rem;">
-      Website by <strong>MD. Kamran AKA Ghost</strong> 👻
+    <footer class="custom-footer">
+      <p>Created by <strong>Md. Kamran AKA Ghost</strong> 👻</p>
     </footer>
   </div>
 
   <canvas id="confetti"></canvas>
-  
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
-    <script src="script.js"></script>
-    
+  <script src="script.js"></script>
 </body>
 </html>
