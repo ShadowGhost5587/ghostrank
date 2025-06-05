@@ -1,8 +1,54 @@
 
-const candidates = [...Array(32).keys()].map(i => ({
-  name: `Candidate ${i + 1}`,
-  img: `images/${i + 1}.png`
-}));
+// Replace this with your actual Firebase config
+var firebaseConfig = {
+  apiKey: "AIzaSyAWK4nn4prf_biO60wJKgED8iJNkawRnu8",
+  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+  projectId: "ghostrank-c557c",
+  storageBucket: "YOUR_PROJECT_ID.appspot.com",
+  messagingSenderId: "972950329066",
+  appId: "1:972950329066:web:0c31ac30dc654ba49da993",
+  databaseURL: "https://ghostrank-c557c-default-rtdb.firebaseio.com"
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+
+
+const candidates = [
+  { name: "Ismile", img: "1.png" },
+  { name: "Sageer", img: "2.png" },
+  { name: "Sanskar", img: "3.png" },
+  { name: "Gufran", img: "4.png" },
+  { name: "Satwik", img: "5.png" },
+  { name: "Zeeshan", img: "6.png" },
+  { name: "Arush", img: "7.png" },
+  { name: "Satyam", img: "8.png" },
+  { name: "Yuvraj", img: "9.png" },
+  { name: "Ansh", img: "10.png" },
+  { name: "Ayaj Joker", img: "11.png" },
+  { name: "Aditya", img: "12.png" },
+  { name: "Shivam", img: "13.png" },
+  { name: "Faizan", img: "14.png" },
+  { name: "Umang", img: "15.png" },
+  { name: "Anukalp", img: "16.png" },
+  { name: "Sahid", img: "17.png" },
+  { name: "Meraj", img: "18.png" },
+  { name: "Jaiswal", img: "19.png" },
+  { name: "Chandan", img: "20.png" },
+  { name: "Raghvendra", img: "21.png" },
+  { name: "Vikas", img: "22.png" },
+  { name: "Tauneer", img: "23.png" },
+  { name: "Kamran", img: "24.png" },
+  { name: "Ehtesham", img: "25.png" },
+  { name: "Aryan", img: "26.png" },
+  { name: "Aditya", img: "27.png" },
+  { name: "Aftab", img: "28.png" },
+  { name: "the silent guy", img: "29.png" },
+  { name: "Rizwan", img: "30.png" },
+  { name: "Rohit", img: "31.png" },
+  { name: "Aryman", img: "32.png" }
+];
 
 let round = [...candidates];
 let nextRound = [];
@@ -13,6 +59,17 @@ function shuffle(array) {
     const j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]];
   }
+}
+
+function vote(side) {
+  const votedFor = currentMatch[side === 'left' ? 0 : 1];
+  nextRound.push(votedFor);
+
+  // Update Firebase score
+  const ref = db.ref('votes/' + votedFor.name);
+  ref.transaction(current => (current || 0) + 1);
+
+  showNextMatch();
 }
 
 function showNextMatch() {
@@ -37,9 +94,14 @@ function showNextMatch() {
   }
 }
 
-function vote(side) {
-  nextRound.push(currentMatch[side === 'left' ? 0 : 1]);
-  showNextMatch();
+function updateLeaderboard(snapshot) {
+  const data = snapshot.val() || {};
+  const sorted = Object.entries(data).sort(([, a], [, b]) => b - a).slice(0, 10);
+  const list = document.getElementById('leaderboard-list');
+  list.innerHTML = sorted.map(([name, score]) => {
+    const imgIndex = candidates.findIndex(c => c.name === name) + 1;
+    return `<li><img src='${imgIndex}.png'> ${name} - ${score}</li>`;
+  }).join('');
 }
 
 function restart() {
@@ -85,5 +147,8 @@ function launchConfetti() {
   setInterval(draw, 30);
 }
 
-shuffle(round);
-showNextMatch();
+window.onload = () => {
+  shuffle(round);
+  showNextMatch();
+  db.ref("votes").on("value", updateLeaderboard);
+};
