@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GhostRank Showdown</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <section class="intro-box">
+      <h2>👋 Welcome to GhostRank</h2>
+      <p>This is the ultimate showdown game where classmates face off in visual battles. Just click on the person you think deserves to win — simple as that!</p>
+      <p>Who will be crowned the ultimate class legend? It’s all up to you.</p>
+      <p class="credit">Crafted with ❤️ by <strong>Md. Kamran AKA Ghost</strong> 👻</p>
+    </section>
+
+    <h1>👻 GhostRank: Class Battle Royale</h1>
+    <p class="subtitle">Click on the candidate you think should win the round!</p>
+
+    <div id="battle">
+      <div class="candidate card" id="left" onclick="vote('left')">
+        <img id="left-img" src="" alt="Left Candidate" />
+        <p id="left-name"></p>
+      </div>
+      <div class="vs">🔥 VS 🔥</div>
+      <div class="candidate card" id="right" onclick="vote('right')">
+        <img id="right-img" src="" alt="Right Candidate" />
+        <p id="right-name"></p>
+      </div>
+    </div>
+
+    <div id="result" style="display:none">
+      <h2>🏆 The Ultimate Classmate is:</h2>
+      <img id="winner-img" src="" alt="Winner" />
+      <h3 id="winner-name"></h3>
+      <p class="funny-text">Since there were only guys... You, my friend, are officially 💅 <strong>GAY</strong> 😘</p>
+      <button onclick="restart()">Replay Showdown 🔄</button>
+    </div>
+
+    <footer class="custom-footer">
+      <p>Created by <strong>Md. Kamran AKA Ghost</strong> 👻</p>
+    </footer>
+  </div>
+
+  <canvas id="confetti"></canvas>
+  <script src="script.js"></script>
+</body>
+</html>
